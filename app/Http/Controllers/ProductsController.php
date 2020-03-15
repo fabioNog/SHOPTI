@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     private $products = [
-        ['index' => 1, 'prod_nome' => 'Notebooks'],
-        ['index' => 2, 'prod_nome' => 'Keyboard']
+        ['id' => 1, 'prod_nome' => 'Notebooks'],
+        ['id' => 2, 'prod_nome' => 'Keyboard']
     ];
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -50,7 +50,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
