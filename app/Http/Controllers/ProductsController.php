@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductsController extends Controller
 {
@@ -10,21 +11,25 @@ class ProductsController extends Controller
         ['id' => 1, 'prod_nome' => 'Notebooks'],
         ['id' => 2, 'prod_nome' => 'Keyboard']
     ];
+
     public function __construct()
     {
-        $products = session('products');
-        if(!isset($cliente))
-            session(['products' => $products]);
+        $products = session('products');    
+        if(!isset($products))
+        session(['product'=> $this->products]);            
     }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $products = $this->products;
-        return view('products.index',compact(['products']));
+    {        
+        
+        $products = session('product');
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -45,12 +50,13 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $index = count($this->products) + 1;
+        $products = session('product');
+        $id = count($products) + 1;
         $prod_nome = $request->prod_nome;
-        $dados = ['id'=>$index,'prod_nome' => $prod_nome];
-        $this->products[] = $dados;
-        $products = $this->products; 
-        return view('products.index',compact(('products')));
+        $dados = ['id'=>$id,'prod_nome' => $prod_nome];
+        $products[] = $dados;
+        session(['product' => $products]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -61,7 +67,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        
+        $products = session('product');
+        $product = $products[$id - 1];
+        return view('products.info',compact('product'));
     }
 
     /**

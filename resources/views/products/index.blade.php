@@ -3,7 +3,9 @@
 <ol>
     @foreach ($products as $p)
         <li>
-            {{$p['prod_nome']}} | <a href="{{route('products.edit', $p['id'])}}">Editar</a>;
+            {{$p['prod_nome']}} 
+            | <a href="{{route('products.edit', $p['id'])}}">Editar</a>;
+            | <a href="{{route('products.show', $p['id'])}}">Info</a>;
         </li>
     @endforeach
 </ol>
