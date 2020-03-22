@@ -80,7 +80,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $products = session('product');
+        $product = $products[$id - 1];
+        return view('products.edit',compact('product'));
     }
 
     /**
