@@ -94,7 +94,10 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $products = session('product');
+        $products[$id - 1]['prod_nome'] = $request->prod_nome;
+        session(['product' => $products]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -105,6 +108,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = session('product');
+        $ids = array_column($products,'id');
+        $index = array_search($id,$ids);
+        array_splice($products,$index,1);
+        session(['product' => $products]);
+        return redirect()->route('products.index');
     }
 }
