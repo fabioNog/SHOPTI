@@ -10,6 +10,12 @@ class ProductsController extends Controller
         ['id' => 1, 'prod_nome' => 'Notebooks'],
         ['id' => 2, 'prod_nome' => 'Keyboard']
     ];
+    public function __construct()
+    {
+        $products = session('products');
+        if(!isset($cliente))
+            session(['products' => $products]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +45,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $index = count($this->products) + 1;
+        $prod_nome = $request->prod_nome;
+        $dados = ['id'=>$index,'prod_nome' => $prod_nome];
+        $this->products[] = $dados;
+        $products = $this->products; 
+        return view('products.index',compact(('products')));
     }
 
     /**

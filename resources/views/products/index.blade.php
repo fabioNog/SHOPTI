@@ -3,7 +3,7 @@
 <ol>
     @foreach ($products as $p)
         <li>
-            {{$p['prod_nome']}};
+            {{$p['prod_nome']}} | <a href="{{route('products.edit', $p['id'])}}">Editar</a>;
         </li>
     @endforeach
 </ol>
