@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('content')
+
 <h3>Informação do produto</h3>
 
 <p>ID: {{$product['id']}}</p>
@@ -5,3 +9,5 @@
 <br>
 
 <a href="{{route('products.index')}}">Home</a>
+
+@endsection

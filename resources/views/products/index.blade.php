@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('content')
+
 <h3>Welcome Products</h3>
 <a href="{{route('products.create')}}">Insert new Products</a>
 
@@ -22,3 +26,5 @@
 
 <h3>Adicione Clientes</h3>
 @endif
+
+@endsection

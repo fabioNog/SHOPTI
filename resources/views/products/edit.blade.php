@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('content')
+
 <h3>Editando o produto</h3>
 
 <form action="{{route('products.update',$product['id'])}}" method="POST">
@@ -7,3 +11,4 @@
     <input type="submit" value="Editar">
 </form>
 
+@endsection
