@@ -51,7 +51,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $products = session('product');
-        $id = count($products) + 1;
+        $id = end($products)['id'] + 1;
         $prod_nome = $request->prod_nome;
         $dados = ['id'=>$id,'prod_nome' => $prod_nome];
         $products[] = $dados;
@@ -68,7 +68,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         $products = session('product');
-        $product = $products[$id - 1];
+        $index = $this->getIndex($id,$products);
+        $product = $products[$index];
         return view('products.info',compact('product'));
     }
 
@@ -81,7 +82,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $products = session('product');
-        $product = $products[$id - 1];
+        $index = $this->getIndex($id,$products);
+        $product = $products[$index];
         return view('products.edit',compact('product'));
     }
 
@@ -95,7 +97,8 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $products = session('product');
-        $products[$id - 1]['prod_nome'] = $request->prod_nome;
+        $index = $this->getIndex($id,$products);
+        $products[$index]['prod_nome'] = $request->prod_nome;
         session(['product' => $products]);
         return redirect()->route('products.index');
     }
@@ -108,11 +111,16 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $products = session('product');
-        $ids = array_column($products,'id');
-        $index = array_search($id,$ids);
+        $products = session('product');    
+        $index = $this->getIndex($id,$products);        
         array_splice($products,$index,1);
         session(['product' => $products]);
         return redirect()->route('products.index');
+    }
+
+    public function getIndex($id,$products){
+        $ids = array_column($products,'id');
+        $index = array_search($id,$ids); 
+        return $index;
     }
 }
