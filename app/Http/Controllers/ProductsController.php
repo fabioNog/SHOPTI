@@ -50,13 +50,26 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        
         $products = session('product');
-        $id = end($products)['id'] + 1;
-        $prod_nome = $request->prod_nome;
-        $dados = ['id'=>$id,'prod_nome' => $prod_nome];
-        $products[] = $dados;
-        session(['product' => $products]);
-        return redirect()->route('products.index');
+        if(count($products) == 0){
+            $id = 1;
+            $prod_nome = $request->prod_nome;
+            $dados = ['id'=>$id,'prod_nome' => $prod_nome];
+            $products[] = $dados;
+            session(['product' => $products]);
+            return redirect()->route('products.index');
+        }
+        else{
+            $id = end($products)['id'] + 1;
+            $prod_nome = $request->prod_nome;
+            $dados = ['id'=>$id,'prod_nome' => $prod_nome];
+            $products[] = $dados;
+            session(['product' => $products]);
+            return redirect()->route('products.index');
+        }
+        
+        
     }
 
     /**

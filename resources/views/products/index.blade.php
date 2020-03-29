@@ -1,5 +1,7 @@
 <h3>Welcome Products</h3>
 <a href="{{route('products.create')}}">Insert new Products</a>
+
+{{-- @if(count($products)>0) --}}
 <ul>
     @foreach ($products as $p)
         <li>
@@ -12,6 +14,11 @@
                 <input type="submit" value="Deletar">
               </form>
             
-            </li>
+        </li>
     @endforeach
 </ul>
+
+{{-- @else  --}}
+
+<h3>Adicione Clientes</h3>
+{{-- @endif --}}
