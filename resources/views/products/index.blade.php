@@ -1,7 +1,7 @@
 <h3>Welcome Products</h3>
 <a href="{{route('products.create')}}">Insert new Products</a>
 
-{{-- @if(count($products)>0) --}}
+@if(count($products)>0)
 <ul>
     @foreach ($products as $p)
         <li>
@@ -18,7 +18,7 @@
     @endforeach
 </ul>
 
-{{-- @else  --}}
+@else 
 
 <h3>Adicione Clientes</h3>
-{{-- @endif --}}
+@endif
